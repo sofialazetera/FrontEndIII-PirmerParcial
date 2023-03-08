@@ -3,18 +3,73 @@ import "./App.css";
 import Card from "./components/Card";
 
 function App() {
-  //test return
+  //Creo los states
+  const [userName, setUserName] = useState("");
+  const [favouritePet, setFavouritePet] = useState("");
+  const [isInputInformationOk, setIsInputInformationOk] =useState({inputs: true, submit:false})
+
+  //creo los actualizadores de estados
+  const onChangeUserName = (e) => setUserName(e.target.value);
+  const onChangeFavouritePet = (e) => setFavouritePet(e.target.value);
+
+  console.log(favouritePet)
+  console.log(userName)
+
+  //creo las validaciones para el formulario
+  const validateUserName = (userName) => {
+    if (userName.length > 2 && userName[0] != " ") {
+      return true;
+    } else {
+      return false;
+    }
+  };
+  const validateFavouritePet = (pet) => {
+    if (pet.length > 5){
+      return true;
+    }else {
+      return false
+    }
+  }
+
+  //creo el evento en submit
+  const onSubmitForm = (e) => {
+    e.preventDefault();
+    const isNameValid = validateUserName(userName);
+    const isAnimalValid = validateFavouritePet(favouritePet);
+    (!isNameValid || !isAnimalValid)
+      ? setIsInputInformationOk({inputs:false,submit:false }) :setIsInputInformationOk({inputs:true,submit:true }) 
+  };
+
   return (
     <div className="App">
-      <h1>Carga de estudiantes</h1>
-      <form >
-      <input
-        type="text"
-        placeholder="Nombre de usuario"
-        
-      />
+      <div>
+      <h1>Animal favorito</h1>
+      <form onSubmit={onSubmitForm}>
+        <div>
+          <input
+            type="text"
+            placeholder="Ingrese su nombre"
+            value={userName}
+            onChange={onChangeUserName}
+          />
+        </div>
+        <div>
+
+          <input
+            type="text"
+            placeholder="Ingrese su animal favorito"
+            value={favouritePet}
+            onChange={onChangeFavouritePet}
+          />
+
+        </div>
+        <button>
+          Enviar
+        </button>
       </form>
-      <Card />
+      </div>
+      <p style={{display:isInputInformationOk.inputs ?"none":"block", color: 'red'}}>Por favor chequéa que la información sea correcta</p>
+      {isInputInformationOk.submit &&<Card userName={userName} favouritePet={favouritePet}/>}
     </div>
   );
 }

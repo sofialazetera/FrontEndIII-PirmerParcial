@@ -1,0 +1,26 @@
+.card {
+    background: linear-gradient(to bottom right, #000, #333);
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    color: #fff;
+    padding: 20px;
+    margin: 20px;
+    max-width: 400px;
+  }
+  
+  .card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .card p {
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+
+  .pet{
+    font-size: 2rem;
+    color: #28a73b;
+
+  }
+  
